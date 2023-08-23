@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('numero_documento');
             $table->string('nombres');
             $table->string('apellido_paterno');
-            $table->string('apellido_materno');
-            $table->string('fecha_nacimiento');
+            $table->string('apellido_materno')->nullable();
+            $table->date('fecha_nacimiento');
             $table->string('numero_celular');
             $table->string('correo');
-            $table->string('bono_asignado');
-            $table->string('estado');
-            $table->timestamps();
+            $table->double('bono_asignado');
+            $table->timestamp('creado_en')->nullable();
+            $table->timestamp('modificado_en')->nullable();
         });
     }
 

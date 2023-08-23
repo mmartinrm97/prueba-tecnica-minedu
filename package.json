@@ -18,6 +18,8 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
-        "dayjs": "^1.11.9"
+        "@headlessui/vue": "^1.7.16",
+        "dayjs": "^1.11.9",
+        "laravel-vue-i18n": "^2.7.1"
     }
 }

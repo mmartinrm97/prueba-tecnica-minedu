@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\VerifyCERule;
+use App\Rules\VerifyDNIRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreDocenteJubiladoRequest extends FormRequest
 {
@@ -22,15 +25,28 @@ class StoreDocenteJubiladoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tipo_documento'=> ['required'],
-            'numero_documento'=> ['required'],
-            'nombres'=> ['required'],
-            'apellido_paterno'=> ['required'],
-            'apellido_materno'=> ['required'],
-            'fecha_nacimiento'=> ['required'],
-            'numero_celular'=> ['required'],
-            'correo'=> ['required','email'],
-            'estado' => ['string']
+            'tipo_documento' => ['required', Rule::in(['DNI', 'CE'])],
+            'numero_documento' => ['required',
+                Rule::when(request('tipo_documento') === 'DNI', [new VerifyDNIRule]),
+                Rule::when(request('tipo_documento') === 'CE', [new VerifyCERule]),
+            ],
+            'nombres' => ['required', 'min:3'],
+            'apellido_paterno' => ['required', 'min:3'],
+            'apellido_materno' => ['nullable', 'min:3'],
+            'fecha_nacimiento' => ['required', 'date', 'before_or_equal:' . now()->subYears(65)->format('Y-m-d')],
+            'numero_celular' => ['required', 'starts_with:9', 'size:9'],
+            'correo' => ['nullable', 'email'],
+        ];
+    }
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'fecha_nacimiento.before_or_equal' => 'El docente debe tener al menos 65 años de edad.',
         ];
     }
 }

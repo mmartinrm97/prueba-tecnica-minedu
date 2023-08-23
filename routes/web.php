@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('docentes-jubilados', DocenteJubiladoController::class)
-    ->only(['index', 'show','store','update','destroy'])
+    ->parameter('docentes-jubilados', 'docenteJubilado')
     ->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';
