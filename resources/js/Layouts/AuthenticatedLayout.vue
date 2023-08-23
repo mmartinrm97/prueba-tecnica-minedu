@@ -121,7 +121,7 @@ const showingNavigationDropdown = ref(false);
                             {{$t('Dashboard')}}
                         </ResponsiveNavLink>
 
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                        <ResponsiveNavLink :href="route('docentes-jubilados.index')" :active="route().current('docentes-jubilados.*')">
                             {{$t('Docentes Jubilados')}}
                         </ResponsiveNavLink>
                     </div>
