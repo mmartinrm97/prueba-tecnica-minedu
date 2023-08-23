@@ -15,7 +15,7 @@ Asegúrate de tener las siguientes herramientas instaladas en tu sistema:
 1. Clona el repositorio a tu máquina local:
 
 ```bash
-git clone https://github.com/TuUsuario/prueba-tecnica-minedu.git
+git clone git@github.com:mmartinrm97/prueba-tecnica-minedu.git
 ```
 
 2. Crea una base de datos MySQL o PostgreSQL para el proyecto.
